@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>脱ガリAIシミュレーター（パスワード保護付き）</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>脱ガリAIシミュレーター（パスワード保護付き）</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin="" src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
         /* 最初はコンテンツを非表示にしておく */
         #content {
             display: none;
@@ -16,13 +17,11 @@
     </style>
 </head>
 <body class="bg-gray-900">
-
-    <!-- パスワードが一致した場合に、この #content の中身が表示される -->
-    <div id="content">
-        <div id="root"></div>
-    </div>
-    
-    <script type="text/babel">
+<!-- パスワードが一致した場合に、この #content の中身が表示される -->
+<div id="content" style="display:block;">
+<div id="root"></div>
+</div>
+<script type="text/babel">
         const { useState } = React;
 
         const BulkUpCalculator = () => {
@@ -277,41 +276,8 @@
                 root.render(<BulkUpCalculator />);
             }
         }
-    </script>
     
-    <script>
-        // --- ここからがパスワード認証の魔法よ ---
-
-        // ★★★ あなただけの「合言葉」をここに設定して ★★★
-        const correctPassword = "datsugari"; 
-
-        function checkPassword() {
-            // ページを開いたら、合言葉を尋ねるプロンプトを表示する
-            const enteredPassword = prompt("合言葉を入力してください");
-
-            // 入力された合言葉が正しいかチェック
-            if (enteredPassword === correctPassword) {
-                // 正しければ、隠していたコンテンツを表示する
-                document.getElementById("content").style.display = "block";
-                // Reactアプリをレンダリングする関数を呼び出す
-                renderApp();
-            } else {
-                // Handle failure or cancel
-                if (enteredPassword === null) {
-                    // User clicked "Cancel" or closed the prompt
-                    document.body.innerHTML = '<h1 style="color:white; text-align:center; margin-top: 50px;">アクセスがキャンセルされました</h1>';
-                } else {
-                    // User entered the wrong password
-                    alert("合言葉が違うみたい..."); // Show alert
-                    checkPassword(); // Show prompt again (recursion)
-                }
-            }
-        }
-
-        // ページが読み込まれたら、合言葉のチェックを開始する
-        window.onload = checkPassword;
-
-    </script>
+renderApp();</script>
 
 </body>
 </html>
